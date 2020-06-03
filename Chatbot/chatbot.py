@@ -57,14 +57,14 @@ class Chatbot(object):
             "原來如此"
         ]
 
-    def waiting_loop(self):
+    def waiting_loop(self, question):
 
         print("你好，我是 " + self.name)
-        while True:
 
-            speech = input()
-            res = self.listen(speech)
-            print(res[0])
+        self.speech = question
+        print(question)
+        res = self.listen(self.speech)
+        return res[0]
 
     def listen(self, sentence, target=None, api_key=None, qa_threshold=35, qa_block_threshold=60):
 
@@ -101,7 +101,7 @@ class Chatbot(object):
         # Assume this sentence is for qa, but use a very high threshold.
         qa_response, qa_sim = self.getResponseForQA(sentence,qa_threshold)
         if qa_sim > qa_block_threshold:
-            return qa_response,None,None,None,None
+            return qa_response, None, None, None, None
 
         # do the rule matching.
         is_confident = self.rule_match(sentence, threshold=0.4)
@@ -115,11 +115,11 @@ class Chatbot(object):
         # is qa again, but this time use a smaller threshold.
         else:
             if qa_sim > qa_threshold:
-                return qa_response,None,None,None
+                return qa_response, None, None, None
             else:
                 # This query has too low similarity for all matching methods.
                 # We can only send back a default response.
-                return self.getDefaultResponse(),None,None,None
+                return self.getDefaultResponse(), None, None, None
 
     def getResponseOnRootDomains(self, target=None):
 
@@ -147,7 +147,7 @@ class Chatbot(object):
         handler = self._get_task_handler()
 
         try:
-            status,response = handler.get_response(self.speech, self.speech_domain, target)
+            status, response = handler.get_response(self.speech, self.speech_domain, target)
         except AttributeError:
             # It will happen when calling a module which have not implemented.
             # If you require more detailed information,
@@ -155,18 +155,18 @@ class Chatbot(object):
             exception = "Handler of '%s' have not implemented" % self.root_domain
             print(exception)
             self.exception_log.write(exception)
-            return [self.getDomainResponse(),None,None,None]
+            return [self.getDomainResponse(), None, None, None]
 
         if response is None:
             response = self.getDomainResponse()
 
         if status is None:
             # One pass talking, this sentence does not belong to any task.
-            return [response,None,None,None]
+            return [response, None, None, None]
         else:
-            target,candiates = handler.get_query()
+            target, candiates = handler.get_query()
             handler.debug(self.extract_attr_log)
-            return [response,status,target,candiates]
+            return [response, status, target, candiates]
 
     def getResponseForQA(self, sentence, threshold=0):
         """
@@ -187,7 +187,7 @@ class Chatbot(object):
         if sim > threshold:
             return response, sim
 
-        return None,0
+        return None, 0
 
     def rule_match(self, speech, threshold):
 
@@ -198,9 +198,9 @@ class Chatbot(object):
         Return: a boolean value, to indicate that this match makes sense or not.
         """
 
-        res,self.last_path = self.console.rule_match(speech, best_only=True)
+        res, self.last_path = self.console.rule_match(speech, best_only=True)
         self.speech = speech
-        self.domain_similarity,self.speech_domain,self.speech_matchee = res
+        self.domain_similarity,self.speech_domain, self.speech_matchee = res
         self._set_root_domain()
 
         if self.domain_similarity < threshold:
@@ -277,7 +277,7 @@ class Chatbot(object):
         if domain is None:
             domain = self.root_domain
 
-        switch  = module_switch.Switch(self.console)
+        switch = module_switch.Switch(self.console)
         handler = switch.get_handler(domain)
 
         return handler
@@ -290,4 +290,4 @@ class Chatbot(object):
 
         return [self.root_domain,
                 self.speech_domain,
-                console.jieba.cut(self.speech,cut_all=False)]
+                console.jieba.cut(self.speech, cut_all=False)]
