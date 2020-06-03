@@ -1,4 +1,4 @@
-#!D:\PycharmProjects\tryChatbot\venv\Scripts\python.exe
+#!D:\PycharmProjects\tryChatbotApi\venv\Scripts\python.exe
 
 # Author: 
 # Contact: grubert@users.sf.net

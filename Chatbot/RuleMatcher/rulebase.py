@@ -83,7 +83,7 @@ class Rule(object):
         for word in sentence:
             for term in self.terms:
                 try:
-                    sim = self.model.similarity(term,word)
+                    sim = self.model.similarity(term, word)
                     if sim > max_sim and sim > threshold:
                         max_sim = sim
                         matchee = word

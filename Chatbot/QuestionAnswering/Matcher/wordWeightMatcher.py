@@ -7,6 +7,7 @@ from collections import defaultdict
 
 from .matcher import Matcher
 
+
 class WordWeightMatcher(Matcher):
 
     """
@@ -105,4 +106,4 @@ class WordWeightMatcher(Matcher):
 
         self.similarity = max_similarity * 100 #統一為百分制
 
-        return target,target_idx
+        return target, target_idx

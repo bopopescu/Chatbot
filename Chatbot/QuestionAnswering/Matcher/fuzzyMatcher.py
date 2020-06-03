@@ -2,6 +2,7 @@ from .matcher import Matcher
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
+
 class FuzzyMatcher(Matcher):
 
     """
@@ -51,7 +52,7 @@ class FuzzyMatcher(Matcher):
             - removeStopWords: 清除 stopwords
             - custom_title: 使用者欲比對的問題集
         """
-        ratio  = -1
+        ratio = -1
         target = ""
         target_idx = -1
 
@@ -67,7 +68,7 @@ class FuzzyMatcher(Matcher):
                 title_list = custom_title
             mQuery = query
 
-        for index,title in enumerate(title_list):
+        for index, title in enumerate(title_list):
 
             newRatio = fuzz.ratio(mQuery, title)
 
@@ -77,7 +78,7 @@ class FuzzyMatcher(Matcher):
                 target_idx = index
 
             elif self.cleanStopWords and newRatio == ratio:
-                target, target_idx = self.tieBreak(query,target_idx,index)
+                target, target_idx = self.tieBreak(query, target_idx, index)
 
         self.similarity = ratio
-        return target,target_idx
+        return target, target_idx

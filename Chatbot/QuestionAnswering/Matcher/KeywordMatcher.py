@@ -1,4 +1,4 @@
-from .matcher import Matcher
+'''from .matcher import Matcher
 
 class KeywordMatcher(Matcher):
 
@@ -12,4 +12,4 @@ class KeywordMatcher(Matcher):
         #TODO
 
     def match(self, query):
-        #TODO
+        TODO'''

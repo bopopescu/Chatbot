@@ -48,7 +48,7 @@ class Matcher(object):
 
     def loadTitles(self, path):
 
-        with open(path,'r',encoding='utf-8') as data:
+        with open(path, 'r', encoding='utf-8') as data:
             self.titles = [line.strip('\n') for line in data]
 
     def match(self, query):
@@ -106,13 +106,13 @@ class Matcher(object):
                 if count % 1000 == 0:
                     logging.info("已斷詞完前 %d 篇文章" % count)
 
-            with open('data/SegTitles.txt','w',encoding="utf-8") as seg_title:
+            with open('data/SegTitles.txt', 'w', encoding="utf-8") as seg_title:
                 for title in self.segTitles:
                     seg_title.write(' '.join(title) + '\n')
             logging.info("完成標題斷詞，結果已暫存至 data/SegTitles.txt")
         else:
             logging.info("偵測到先前的標題斷詞結果，讀取中...")
-            with open('data/SegTitles.txt','r',encoding="utf-8") as seg_title:
+            with open('data/SegTitles.txt', 'r', encoding="utf-8") as seg_title:
                 for line in seg_title:
                     line = line.strip('\n')
                     seg = line.split()

@@ -155,4 +155,4 @@ class bestMatchingMatcher(Matcher):
         target = ''.join(self.segTitles[target_idx])
         self.similarity = max * 100 #百分制
 
-        return target,target_idx
+        return target, target_idx

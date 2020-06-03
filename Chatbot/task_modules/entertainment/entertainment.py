@@ -1,11 +1,11 @@
 class entertainment(object):
 
     def __init__(self, console):
-        self.console  = console
-        self.console  = console
+        self.console = console
+        self.console = console
         self.currrent_domain = None
-		
-    def get_response(self,user_input, domain, target):
+
+    def get_response(self, user_input, domain, target):
         """
         Return:
             - response : String, 針對使用者的提問給予的答覆
@@ -14,17 +14,17 @@ class entertainment(object):
             - target   : String, 對照 get_query 的形式，表示當前的user_input是來自
                          bubble button，用來回復該target_attr之狀態
         """
-		#need 未知>分類>地點.專名>回傳
-        keywords = self.console.word_segment(user_input) #cut sentence ,return list
+        # need 未知>分類>地點.專名>回傳
+
+        keywords = self.console.word_segment(user_input) # cut sentence ,return list
         if "訂" in user_input:
             res_url = "https://tw.eztable.com/search?q=" + domain
             self.currrent_domain = res_url
             return [None , res_url]
-        else :
+        else:
             self.currrent_domain = domain
             return [None , domain]
-		
-	
+
     def get_query(self):
         """
         Return:
@@ -32,7 +32,9 @@ class entertainment(object):
         - candiaties  : List, 對該詢問預設的答案列表 (bubble buttons)
         """
         return [None, self.currrent_domain]
+
     def restore(self, memory):
         pass
+
     def get_suggest(self):
         pass

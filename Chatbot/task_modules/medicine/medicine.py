@@ -247,7 +247,7 @@ class MedicalListener(Task):
 
     def rule_match(self, keywords, reasoning_root, threshold, remove=True):
 
-        res,path = self.console.rule_match(sentence=keywords, segmented=True,
+        res, path = self.console.rule_match(sentence=keywords, segmented=True,
                                            search_from=reasoning_root, best_only=True)
 
         if res[0] < threshold: # 已抽取不到任何特徵
@@ -257,6 +257,7 @@ class MedicalListener(Task):
         if remove:
             keywords.remove(res[2]) # 刪除已匹配的字串
         return res[1]
+
 
     def look_up(self, domain):
         """

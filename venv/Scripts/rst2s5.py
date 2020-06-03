@@ -1,4 +1,4 @@
-#!D:\PycharmProjects\tryChatbot\venv\Scripts\python.exe
+#!D:\PycharmProjects\tryChatbotApi\venv\Scripts\python.exe
 
 # $Id: rst2s5.py 4564 2006-05-21 20:44:42Z wiemann $
 # Author: Chris Liechti <cliechti@gmx.net>

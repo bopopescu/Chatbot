@@ -9,18 +9,16 @@ from bs4 import BeautifulSoup
 class HotelListener(object):
 
 	def __init__(self, console):
-		self.console  = console
-		self.locate	 = ""
-		self.month 		 = ""
-		self.add_day 		 = ""
-		self.week 		 = ""
-		self.day		 = ""
-		self.date 		 = ""
-		self.end 		 = ""
-		self.fac		 = []
-		self.hotel_dic = {"locate":None,
-							"time":None,
-							"end":None}
+		self.console = console
+		self.locate = ""
+		self.month = ""
+		self.add_day = ""
+		self.week = ""
+		self.day = ""
+		self.date = ""
+		self.end = ""
+		self.fac = []
+		self.hotel_dic = {"locate": None, "time": None, "end": None}
 
 		self._matchee_index = -1
 		self._response = [
@@ -440,7 +438,6 @@ class HotelListener(object):
 				self.hotel_dic["time"] = self.date
 				self.hotel_dic["end"] = self.end
 			break
-				
 
 	def rule_match(self, keywords, reasoning_root, threshold, remove=True):
 
@@ -454,7 +451,6 @@ class HotelListener(object):
 		if remove:
 			keywords.remove(res[2]) # 刪除已匹配的字串
 		return res[1]
-
 
 	def look_up(self, domain):
 		"""
